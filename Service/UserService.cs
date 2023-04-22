@@ -71,7 +71,7 @@ namespace covoituragecodefirst.Service
         }
 
        //************************************************************
-
+       //****************** supprimer un user ********************
         public void DeleteConducteur(Conducteur conducteur)
         {
             _context.Conducteurs.Remove(conducteur); // Supprimer un utilisateur de la base de données
@@ -83,6 +83,8 @@ namespace covoituragecodefirst.Service
             _context.Passagers.Remove(passager); // Supprimer un utilisateur de la base de données
             _context.SaveChanges(); // Enregistrer les changements dans la base de données
         }
+        //**************************************************
+
 
         // un passager peut réserver un trajet 
         public void ReserverTrajet(Passager Passager, Trajet trajet, int nbreplaces)
@@ -129,7 +131,7 @@ namespace covoituragecodefirst.Service
 
         }
 
-        // une methode qui ajoute la liste des reservations d'un passager donné !
+        // une methode returne la liste des reservations d'un passager donné !
         public List<Reservation> GetReservationsById(int passagerId)
         {
             var passager = _context.Passagers.Find(passagerId);
@@ -170,11 +172,95 @@ namespace covoituragecodefirst.Service
             }
         }
 
-        //
+        // rechercher les trajets selon les regions de depart et d'arrivé et que date de depart mafetetch hhhh !!
+        public List<Trajet> RechercherTrajet(Region lieuDepart, Region lieuArrivee)
+        {
+            var currentDate = DateTime.Now;
+            var trajets = _context.Trajets
+                .Where(t => t.RegionDepart == lieuDepart && t.RegionArrivee == lieuArrivee && t.DateDepart < currentDate)
+                .ToList();
+            return trajets;
+        }
+
+        // lezem fonction tfassa5li les trajets li date mteehhom a9al mil date actuelle 
+        public void SupprimerTrajetsPasses()
+        {
+            var currentDate = DateTime.Now;
+            var trajetsASupprimer = _context.Trajets
+                .Where(t => t.DateDepart < currentDate)
+                .ToList();
+
+            foreach (var trajet in trajetsASupprimer)
+            {
+                _context.Trajets.Remove(trajet);
+            }
+
+            _context.SaveChanges();
+        }
+   // fonction qui supprime une reservation, si un passager veut annuler sa resevation
+
+        public void SupprimerReservation(int idPassager, int idReservation)
+        {
+        // Rechercher le passager dans la base de données ou dans la liste des passagers
+            Passager passager = _context.Passagers.FirstOrDefault(p => p.Id == idPassager);
+
+            if (passager != null)
+            {
+                // Rechercher la réservation dans la liste des réservations du passager
+                Reservation reservation = passager.reservations.FirstOrDefault(r => r.Id == idReservation);
+
+                if (reservation != null)
+                {
+                    // Supprimer la réservation de la liste des réservations du passager
+                    passager.reservations.Remove(reservation);
+
+                    // Enregistrer les modifications dans la base de données ou dans la liste des passagers
+                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                }
+            }
+        }
+
+
+        // fonction qui supprime un trajet 
+        public void SupprimerTrajet(int idConducteur, int idTrajet)
+        {
+            // Rechercher le conducteur dans la base de données ou dans la liste des conducteurs
+            Conducteur conducteur = _context.Conducteurs.FirstOrDefault(c => c.Id == idConducteur);
+
+            if (conducteur != null)
+            {
+                // Rechercher le trajet dans la liste des trajets du conducteur
+                Trajet trajet = conducteur.Trajets.FirstOrDefault(t => t.Id == idTrajet);
+
+                if (trajet != null)
+                {
+                    // Supprimer le trajet de la liste des trajets du conducteur
+                    conducteur.Trajets.Remove(trajet);
+
+                    // Enregistrer les modifications dans la base de données ou dans la liste des conducteurs
+                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
 
 
-    }
+
 }

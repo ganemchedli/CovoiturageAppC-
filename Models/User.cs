@@ -14,8 +14,16 @@
         public int Tel { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public User(int id, string nom, string prenom, int cin, int tel, string login, string password)
+        {
+            Id = id;
+            Nom = nom;
+            Prenom = prenom;
+            Cin = cin;
+            Tel = tel;
+            Login = login;
+            Password = password;
+        }
 
-        // Liste pour stocker les réservations
-        public List<Reservation> reservations = new List<Reservation>();
     }
 }

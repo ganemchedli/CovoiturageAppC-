@@ -7,12 +7,12 @@
         public int NombrePlacesReservees { get; set; }
         
         public double MontantAPayer { get; set; }
-        public User Utilisateur { get; set; }
+        public Passager passager { get; set; }
         public Trajet Trajet { get; set; }
 
-        public Reservation(User user, Trajet trajet, int nombrePlaces)
+        public Reservation(Passager passager, Trajet trajet, int nombrePlaces)
         {
-            Utilisateur = user;
+            passager = passager;
             Trajet = trajet;
             NombrePlacesReservees = nombrePlaces;
            

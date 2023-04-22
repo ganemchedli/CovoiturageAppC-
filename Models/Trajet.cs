@@ -22,5 +22,17 @@
         // liste des réservation dans un trajet 
         private List<Reservation> reservations = new List<Reservation>();
 
+        public Conducteur createurdutrajet { get; set; }
+
+        public Trajet( int nombrePlacesDisponibles, DateTime dateDepart, decimal prixPlace, Region regionDepart, Region regionArrivee, Conducteur createurDuTrajet)
+        {
+           
+            NombrePlacesDisponibles = nombrePlacesDisponibles;
+            DateDepart = dateDepart;
+            PrixPlace = prixPlace;
+            RegionDepart = regionDepart;
+            RegionArrivee = regionArrivee;
+            createurdutrajet = createurDuTrajet;
+        }
     }
 }
