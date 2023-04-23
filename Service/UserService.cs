@@ -18,7 +18,7 @@ namespace covoituragecodefirst.Service
         {
             _context = dbContext;
         }
-        //****************Ajout des personnes **********************
+        //Ajout des personnes 
         public void AddConducteur(Conducteur conducteur)
         {
             _context.Conducteurs.Add(conducteur); // Ajouter un nouvel conducteur à la base de données
@@ -28,13 +28,10 @@ namespace covoituragecodefirst.Service
         public void AddPasssager(Passager passager)
         {
             _context.Passagers.Add(passager); // Ajouter un nouvel passager à la base de données
-            _context.SaveChanges(); // Enregistrer les changements dans la base de données
-        }
-
-      //***********************************************************
+            _context.SaveChanges(); // Enregistrer les changements dans la base de données 
 
        
-      // **************** mise à jour des comptes personnes ************************
+      //mise à jour des comptes personnes 
 
         public void UpdateConducteur(Conducteur conducteur)
         {
@@ -70,8 +67,7 @@ namespace covoituragecodefirst.Service
 
         }
 
-       //************************************************************
-       //****************** supprimer un user ********************
+       //supprimer un user
         public void DeleteConducteur(Conducteur conducteur)
         {
             _context.Conducteurs.Remove(conducteur); // Supprimer un utilisateur de la base de données
@@ -81,9 +77,7 @@ namespace covoituragecodefirst.Service
         public void DeletePassager(Passager passager)
         {
             _context.Passagers.Remove(passager); // Supprimer un utilisateur de la base de données
-            _context.SaveChanges(); // Enregistrer les changements dans la base de données
-        }
-        //**************************************************
+            _context.SaveChanges(); // Enregistrer les changements dans la base de données 
 
 
         // un passager peut réserver un trajet 
@@ -172,7 +166,7 @@ namespace covoituragecodefirst.Service
             }
         }
 
-        // rechercher les trajets selon les regions de depart et d'arrivé et que date de depart mafetetch hhhh !!
+        // rechercher les trajets selon les regions de depart et d'arrivé et que date de depart n'a pas dépassé
         public List<Trajet> RechercherTrajet(Region lieuDepart, Region lieuArrivee)
         {
             var currentDate = DateTime.Now;
@@ -215,7 +209,7 @@ namespace covoituragecodefirst.Service
                     passager.reservations.Remove(reservation);
 
                     // Enregistrer les modifications dans la base de données ou dans la liste des passagers
-                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                    _context.SaveChanges(); 
                 }
             }
         }
@@ -238,25 +232,10 @@ namespace covoituragecodefirst.Service
                     conducteur.Trajets.Remove(trajet);
 
                     // Enregistrer les modifications dans la base de données ou dans la liste des conducteurs
-                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                    _context.SaveChanges(); 
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
