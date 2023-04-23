@@ -14,6 +14,7 @@ namespace covoituragecodefirst.Service
 
         public Reservation GetReservationById(int id)
         {
+
             return _dbContext.Reservations.FirstOrDefault(r => r.Id == id);
         }
 
