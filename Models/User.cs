@@ -2,18 +2,54 @@
 {
     public class User
     {
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
-        public int Id { get; set; }
+        private string _nom;
+        public string Nom
+        {
+            get { return _nom; }
+            set { _nom = value; }
+        }
 
-        // Propriété de nom
-        public string Nom { get; set; }
+        private string _prenom;
+        public string Prenom
+        {
+            get { return _prenom; }
+            set { _prenom = value; }
+        }
 
-        // Propriété de prénom
-        public string Prenom { get; set; }
-        public int Cin { get; set; }
-        public int Tel { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        private int _cin;
+        public int Cin
+        {
+            get { return _cin; }
+            set { _cin = value; }
+        }
+
+        private int _tel;
+        public int Tel
+        {
+            get { return _tel; }
+            set { _tel = value; }
+        }
+
+        private string _login;
+        public string Login
+        {
+            get { return _login; }
+            set { _login = value; }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
+        }
         public User(int id, string nom, string prenom, int cin, int tel, string login, string password)
         {
             Id = id;

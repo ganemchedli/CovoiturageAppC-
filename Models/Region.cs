@@ -2,13 +2,26 @@
 {
     public class Region
     {
-        // Propriété d'identifiant
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
-        // Propriété de nom de la région
-        public string Nom { get; set; }
+        private string _nom;
+        public string Nom
+        {
+            get { return _nom; }
+            set { _nom = value; }
+        }
 
-        // Propriété de code de la région
-        public string CodePostale { get; set; }
+        private string _codePostale;
+        public string CodePostale
+        {
+            get { return _codePostale; }
+            set { _codePostale = value; }
+        }
+
     }
 }

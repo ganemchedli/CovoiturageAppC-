@@ -2,27 +2,62 @@
 {
     public class Trajet
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
-        // Propriété du nombre de places disponibles
-        public int NombrePlacesDisponibles { get; set; }
+        private int _nombrePlacesDisponibles;
+        public int NombrePlacesDisponibles
+        {
+            get { return _nombrePlacesDisponibles; }
+            set { _nombrePlacesDisponibles = value; }
+        }
 
-        // Propriété de la date de départ
-        public DateTime DateDepart { get; set; }
+        private DateTime _dateDepart;
+        public DateTime DateDepart
+        {
+            get { return _dateDepart; }
+            set { _dateDepart = value; }
+        }
 
-        // Propriété du prix d'une place
-        public decimal PrixPlace { get; set; }
+        private decimal _prixPlace;
+        public decimal PrixPlace
+        {
+            get { return _prixPlace; }
+            set { _prixPlace = value; }
+        }
 
-        // Propriété de la région de départ
-        public Region RegionDepart { get; set; }
+        private Region _regionDepart;
+        public Region RegionDepart
+        {
+            get { return _regionDepart; }
+            set { _regionDepart = value; }
+        }
 
-        // Propriété de la région d'arrivée
-        public Region RegionArrivee { get; set; }
+        private Region _regionArrivee;
+        public Region RegionArrivee
+        {
+            get { return _regionArrivee; }
+            set { _regionArrivee = value; }
+        }
 
-        // liste des réservation dans un trajet 
-        private List<Reservation> reservations = new List<Reservation>();
+        private List<Reservation> _reservations;
+        public List<Reservation> Reservations
+        {
+            get { return _reservations; }
+            set { _reservations = value; }
+        }
 
-        public Conducteur createurdutrajet { get; set; }
+        private Conducteur _createurDuTrajet;
+        public Conducteur CreateurDuTrajet
+        {
+            get { return _createurDuTrajet; }
+            set { _createurDuTrajet = value; }
+        }
+
 
         public Trajet( int nombrePlacesDisponibles, DateTime dateDepart, decimal prixPlace, Region regionDepart, Region regionArrivee, Conducteur createurDuTrajet)
         {
@@ -32,7 +67,7 @@
             PrixPlace = prixPlace;
             RegionDepart = regionDepart;
             RegionArrivee = regionArrivee;
-            createurdutrajet = createurDuTrajet;
+            CreateurDuTrajet = createurDuTrajet;
         }
     }
 }

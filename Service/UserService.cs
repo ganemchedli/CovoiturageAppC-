@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using covoituragecodefirst.Models;
 using covoituragecodefirst.persistence;
 using Microsoft.EntityFrameworkCore;
-using  covoituragecodefirst.Models;
 
 namespace covoituragecodefirst.Service
 
@@ -18,7 +17,7 @@ namespace covoituragecodefirst.Service
         {
             _context = dbContext;
         }
-        //****************Ajout des personnes **********************
+        //Ajout des personnes 
         public void AddConducteur(Conducteur conducteur)
         {
             _context.Conducteurs.Add(conducteur); // Ajouter un nouvel conducteur à la base de données
@@ -28,15 +27,12 @@ namespace covoituragecodefirst.Service
         public void AddPasssager(Passager passager)
         {
             _context.Passagers.Add(passager); // Ajouter un nouvel passager à la base de données
-            _context.SaveChanges(); // Enregistrer les changements dans la base de données
+            _context.SaveChanges(); // Enregistrer les changements dans la base de données 
         }
-
-      //***********************************************************
-
        
-      // **************** mise à jour des comptes personnes ************************
+      //mise à jour des comptes personnes 
 
-        public void UpdateConducteur(Conducteur conducteur)
+        public  void UpdateConducteur(Conducteur conducteur)
         {
             var cond = _context.Conducteurs.Find(conducteur.Id);
             if (cond != null)
@@ -70,34 +66,34 @@ namespace covoituragecodefirst.Service
 
         }
 
-       //************************************************************
-       //****************** supprimer un user ********************
+       //supprimer un user
         public void DeleteConducteur(Conducteur conducteur)
         {
-            _context.Conducteurs.Remove(conducteur); // Supprimer un utilisateur de la base de données
-            _context.SaveChanges(); // Enregistrer les changements dans la base de données
-        }
+            // Supprimer un utilisateur de la base de données
+            _context.Conducteurs.Remove(conducteur); 
+            // Enregistrer les changements dans la base de données
+            _context.SaveChanges();         }
 
         public void DeletePassager(Passager passager)
         {
-            _context.Passagers.Remove(passager); // Supprimer un utilisateur de la base de données
-            _context.SaveChanges(); // Enregistrer les changements dans la base de données
+            // Supprimer un utilisateur de la base de données
+            _context.Passagers.Remove(passager);
+            // Enregistrer les changements dans la base de données 
+            _context.SaveChanges(); 
+
         }
-        //**************************************************
-
-
         // un passager peut réserver un trajet 
-        public void ReserverTrajet(Passager Passager, Trajet trajet, int nbreplaces)
+        public void ReserverTrajet(double monttantAPayer , Passager Passager, Trajet trajet, int nbreplaces)
         {
             if (nbreplaces < trajet.NombrePlacesDisponibles)
             {
 
                 {
                     // Créer une nouvelle réservation avec le passager et le trajet
-                    Reservation reservation = new Reservation(Passager, trajet, nbreplaces);
+                    Reservation reservation = new Reservation(monttantAPayer, Passager, trajet, nbreplaces);
 
                     // Ajouter la réservation à la collection de réservations dans la classe User
-                    Passager.reservations.Add(reservation);
+                    Passager.Reservations.Add(reservation);
 
 
                     // Ajouter la réservation à la table Reservations dans la base de données
@@ -138,7 +134,7 @@ namespace covoituragecodefirst.Service
             if (passager != null)
             {
                 var reservations = _context.Reservations
-                    .Where(r => r.passager.Id == passagerId)
+                    .Where(r => passager.Id == passagerId)
                     .ToList();
                 return reservations;
             }
@@ -147,7 +143,7 @@ namespace covoituragecodefirst.Service
                 // Gérer le cas où le passager n'est pas trouvé
                 // Par exemple, retourner une liste vide ou lever une exception
                 return new List<Reservation>();
-                Console.WriteLine("passager n existe pas !");
+                //Console.WriteLine("passager n existe pas !");
             }
 
         }
@@ -159,7 +155,7 @@ namespace covoituragecodefirst.Service
             if (conducteur != null)
             {
                 var trajets = _context.Trajets
-                    .Where(t => t.createurdutrajet.Id == conducteurId)
+                    .Where(t => conducteur.Id == conducteurId)
                     .ToList();
                 return trajets;
             }
@@ -172,7 +168,7 @@ namespace covoituragecodefirst.Service
             }
         }
 
-        // rechercher les trajets selon les regions de depart et d'arrivé et que date de depart mafetetch hhhh !!
+        // rechercher les trajets selon les regions de depart et d'arrivé et que date de depart n'a pas dépassé
         public List<Trajet> RechercherTrajet(Region lieuDepart, Region lieuArrivee)
         {
             var currentDate = DateTime.Now;
@@ -207,15 +203,15 @@ namespace covoituragecodefirst.Service
             if (passager != null)
             {
                 // Rechercher la réservation dans la liste des réservations du passager
-                Reservation reservation = passager.reservations.FirstOrDefault(r => r.Id == idReservation);
+                Reservation reservation = passager.Reservations.FirstOrDefault(r => r.Id == idReservation);
 
                 if (reservation != null)
                 {
                     // Supprimer la réservation de la liste des réservations du passager
-                    passager.reservations.Remove(reservation);
+                    passager.Reservations.Remove(reservation);
 
                     // Enregistrer les modifications dans la base de données ou dans la liste des passagers
-                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                    _context.SaveChanges(); 
                 }
             }
         }
@@ -238,24 +234,41 @@ namespace covoituragecodefirst.Service
                     conducteur.Trajets.Remove(trajet);
 
                     // Enregistrer les modifications dans la base de données ou dans la liste des conducteurs
-                    _context.SaveChanges(); // Si vous utilisez Entity Framework pour accéder à une base de données
+                    _context.SaveChanges(); 
                 }
             }
         }
+        public bool AuthenticatePassager(string login, string password)
+        {
+            var user = _context.Passagers.SingleOrDefault(p => p.Login == login && p.Password == password);
 
+            if (user == null)
+            {
+                // Passager not found or incorrect password
+                return false;
+            }
+            else
+            {
+                // Passager found and password is correct
+                return true;
+            }
+        }
 
+        public bool AuthenticateConducteru(string login, string password)
+        {
+            var user = _context.Conducteurs.SingleOrDefault(p => p.Login == login && p.Password == password);
 
-
-
-
-
-
-
-
-
-
-
-
+            if (user == null)
+            {
+                // Conduteur not found or incorrect password
+                return false;
+            }
+            else
+            {
+                // Conduteur found and password is correct
+                return true;
+            }
+        }
 
 
     }

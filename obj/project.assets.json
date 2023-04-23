@@ -6309,19 +6309,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\covoituragecodefirst\\covoituragecodefirst.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
       "projectName": "covoituragecodefirst",
-      "projectPath": "C:\\Users\\User\\source\\repos\\covoituragecodefirst\\covoituragecodefirst.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\covoituragecodefirst\\obj\\",
+      "projectPath": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

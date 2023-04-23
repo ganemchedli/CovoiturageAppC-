@@ -2,10 +2,16 @@
 {
     public class Passager : User
     {
-        public virtual ICollection<Reservation> reservations { get; set; }
-        public Passager(int id, string nom, string prenom, int cin, int tel, string login, string password) : base(id, nom, prenom, cin, tel, login, password)
+        private ICollection<Reservation> _reservations;
+        public virtual ICollection<Reservation> Reservations
         {
-            reservations = new List<Reservation>();
+            get { return _reservations ?? (_reservations = new List<Reservation>()); }
+            set { _reservations = value; }
+        }
+
+        public Passager(int id, string nom, string prenom, int cin, int tel, string login, string password, ICollection<Reservation> reservations) : base(id, nom, prenom, cin, tel, login, password)
+        {
+            Reservations = reservations ;
         }
 
     }
