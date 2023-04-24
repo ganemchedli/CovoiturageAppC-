@@ -12,14 +12,14 @@ namespace covoituragecodefirst.persistence
        /* public DbSet<Conducteur> Conducteurs { get; set; } = null;
         public DbSet<Passager> Passagers { get; set; } = null;
         */
-        public DbSet<Region> Regions { get; set; } = null;
-        public DbSet<Trajet> Trajets { get; set; } = null;
-        public DbSet<Reservation> Reservations { get; set; } = null;
+        public DbSet<Region> Regions { get; set; } 
+        public DbSet<Trajet> Trajets { get; set; } 
+        public DbSet<Reservation> Reservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Configurer la chaîne de connexion à votre base de données
-            optionsBuilder.UseMySQL("mysql://localhost:3360/covoiturage");
+            optionsBuilder.UseMySQL("mysql://root:root@localhost:3306/carpooling");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,19 +39,19 @@ namespace covoituragecodefirst.persistence
              modelBuilder.Entity<Reservation>()
             .HasOne(r => r.Passager)
             .WithMany(p => p.Reservations)
-            .HasForeignKey(r => r.PassagerId);
+            .HasForeignKey(r => r.Passager.Id);
 
             // Configurer la relation entre Trajet et Conducteur
         modelBuilder.Entity<Trajet>()
-            .HasOne(t => t.Conducteur)
-            .WithMany(c => c.Trajets)
-            .HasForeignKey(t => t.ConducteurId);
+            .HasOne(t => t.CreateurDuTrajet)
+            .WithMany(t => t.Trajets)
+            .HasForeignKey(t => t.CreateurDuTrajet.Id);
 
              // Configurer la relation entre Trajet et Reservation
         modelBuilder.Entity<Trajet>()
             .HasMany(t => t.Reservations)
             .WithOne(r => r.Trajet)
-            .HasForeignKey(r => r.TrajetId);
+            .HasForeignKey(r => r.Trajet.Id);
 
 
         base.OnModelCreating(modelBuilder);

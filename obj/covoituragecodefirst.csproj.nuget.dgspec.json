@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj": {}
+    "C:\\Users\\USER\\source\\repos\\CovoiturageAppC-\\covoituragecodefirst.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj": {
+    "C:\\Users\\USER\\source\\repos\\CovoiturageAppC-\\covoituragecodefirst.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
         "projectName": "covoituragecodefirst",
-        "projectPath": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
+        "projectPath": "C:\\Users\\USER\\source\\repos\\CovoiturageAppC-\\covoituragecodefirst.csproj",
         "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Source\\Repos\\CovoiturageAppC-\\obj\\",
+        "outputPath": "C:\\Users\\USER\\source\\repos\\CovoiturageAppC-\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,17 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0-preview.3.23174.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             },
             "MySql.Data.EntityFrameworkCore": {
               "target": "Package",

@@ -1,7 +1,12 @@
-﻿namespace covoituragecodefirst.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace covoituragecodefirst.Models
 {
+    [Table("regions")]
     public class Region
     {
+        [Key]
         private int _id;
         public int Id   
         {

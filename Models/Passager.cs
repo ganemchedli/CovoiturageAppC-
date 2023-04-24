@@ -1,4 +1,6 @@
-﻿namespace covoituragecodefirst.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace covoituragecodefirst.Models
 {
     [Table("Users")]
     public class Passager : User
