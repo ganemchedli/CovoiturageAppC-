@@ -1,7 +1,11 @@
-﻿namespace covoituragecodefirst.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace covoituragecodefirst.Models
 {
     [Table("Users")]
-    [Inheritance(strategy: InheritanceStrategy.SingleTable)]
+    //[Inheritance(strategy: InheritanceStrategy.SingleTable)]
 
     public class User
     {

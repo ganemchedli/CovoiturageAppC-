@@ -20,13 +20,13 @@ namespace covoituragecodefirst.Service
         //Ajout des personnes 
         public void AddConducteur(Conducteur conducteur)
         {
-            _context.Conducteurs.Add(conducteur); // Ajouter un nouvel conducteur à la base de données
+            _context.Users.Add(conducteur); // Ajouter un nouvel conducteur à la base de données
             _context.SaveChanges(); // Enregistrer les changements dans la base de données
         }
 
         public void AddPasssager(Passager passager)
         {
-            _context.Passagers.Add(passager); // Ajouter un nouvel passager à la base de données
+            _context.Users.Add(passager); // Ajouter un nouvel passager à la base de données
             _context.SaveChanges(); // Enregistrer les changements dans la base de données 
         }
        
@@ -34,10 +34,10 @@ namespace covoituragecodefirst.Service
 
         public  void UpdateConducteur(Conducteur conducteur)
         {
-            var cond = _context.Conducteurs.Find(conducteur.Id);
+            var cond = _context.Users.Find(conducteur.Id);
             if (cond != null)
             {
-                _context.Conducteurs.Update(cond); // Mettre à jour les informations d'un utilisateur dans la base de données
+                _context.Users.Update(cond); // Mettre à jour les informations d'un utilisateur dans la base de données
                 _context.SaveChanges(); // Enregistrer les changements dans la base de données
 
             }
@@ -51,10 +51,10 @@ namespace covoituragecodefirst.Service
 
         public void UpdatePassager(Passager passager)
         {
-            var pass = _context.Conducteurs.Find(passager.Id);
+            var pass = _context.Users.Find(passager.Id);
             if (pass != null)
             {
-                _context.Conducteurs.Update(pass); // Mettre à jour les informations d'un utilisateur dans la base de données
+                _context.Users.Update(pass); // Mettre à jour les informations d'un utilisateur dans la base de données
                 _context.SaveChanges(); // Enregistrer les changements dans la base de données
 
             }
@@ -70,14 +70,14 @@ namespace covoituragecodefirst.Service
         public void DeleteConducteur(Conducteur conducteur)
         {
             // Supprimer un utilisateur de la base de données
-            _context.Conducteurs.Remove(conducteur); 
+            _context.Users.Remove(conducteur); 
             // Enregistrer les changements dans la base de données
             _context.SaveChanges();         }
 
         public void DeletePassager(Passager passager)
         {
             // Supprimer un utilisateur de la base de données
-            _context.Passagers.Remove(passager);
+            _context.Users.Remove(passager);
             // Enregistrer les changements dans la base de données 
             _context.SaveChanges(); 
 
@@ -85,7 +85,7 @@ namespace covoituragecodefirst.Service
         // un passager peut réserver un trajet 
         public void ReserverTrajet(double monttantAPayer , Passager Passager, Trajet trajet, int nbreplaces)
         {
-            if (nbreplaces <= GetNombrePlacesRestantes( trajet.id))
+            if (nbreplaces <= GetNombrePlacesRestantes( trajet.Id))
             {
 
                 {
@@ -130,7 +130,7 @@ namespace covoituragecodefirst.Service
         // une methode returne la liste des reservations d'un passager donné !
         public List<Reservation> GetReservationsById(int passagerId)
         {
-            var passager = _context.Passagers.Find(passagerId);
+            var passager = _context.Users.Find(passagerId);
             if (passager != null)
             {
                 var reservations = _context.Reservations
@@ -151,7 +151,7 @@ namespace covoituragecodefirst.Service
         // une methode qui returne la liste des trajets crée par un conducteur 
         public List<Trajet> GetTrajetsByConducteurId(int conducteurId)
         {
-            var conducteur = _context.Conducteurs.Find(conducteurId);
+            var conducteur = _context.Users.Find(conducteurId);
             if (conducteur != null)
             {
                 var trajets = _context.Trajets
@@ -198,7 +198,7 @@ namespace covoituragecodefirst.Service
         public void SupprimerReservation(int idPassager, int idReservation)
         {
         // Rechercher le passager dans la base de données ou dans la liste des passagers
-            Passager passager = _context.Passagers.FirstOrDefault(p => p.Id == idPassager);
+            Passager passager = (Passager)_context.Users.FirstOrDefault(p => p.Id == idPassager);
 
             if (passager != null)
             {
@@ -221,7 +221,7 @@ namespace covoituragecodefirst.Service
         public void SupprimerTrajet(int idConducteur, int idTrajet)
         {
             // Rechercher le conducteur dans la base de données ou dans la liste des conducteurs
-            Conducteur conducteur = _context.Conducteurs.FirstOrDefault(c => c.Id == idConducteur);
+            Conducteur conducteur = (Conducteur)_context.Users.FirstOrDefault(c => c.Id == idConducteur);
 
             if (conducteur != null)
             {
@@ -276,7 +276,7 @@ namespace covoituragecodefirst.Service
 
          public bool AuthenticateUser(string login, string password)
         {
-            var User user = _context.Users.SingleOrDefault(u => u.Login == login && u.Password == password);
+            User user = _context.Users.SingleOrDefault(u => u.Login == login && u.Password == password);
 
             if (user == null)
             {
@@ -296,7 +296,7 @@ namespace covoituragecodefirst.Service
         {
             // Utiliser LINQ pour interroger la base de données et récupérer les réservations
             var reservations = _context.Reservations
-                .Where(r => r.TrajetId == trajetId)
+                .Where(r => r.Trajet.Id == trajetId)
                 .ToList();
 
             return reservations;

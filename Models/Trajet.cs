@@ -1,7 +1,12 @@
-﻿namespace covoituragecodefirst.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace covoituragecodefirst.Models
 {
+    [Table("trajets")] 
     public class Trajet
     {
+        [Key]
         private int _id;
         public int Id
         {
