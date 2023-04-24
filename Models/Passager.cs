@@ -1,5 +1,6 @@
 ﻿namespace covoituragecodefirst.Models
 {
+    [Table("Users")]
     public class Passager : User
     {
         private ICollection<Reservation> _reservations;

@@ -85,7 +85,7 @@ namespace covoituragecodefirst.Service
         // un passager peut réserver un trajet 
         public void ReserverTrajet(double monttantAPayer , Passager Passager, Trajet trajet, int nbreplaces)
         {
-            if (nbreplaces < trajet.NombrePlacesDisponibles)
+            if (nbreplaces <= GetNombrePlacesRestantes( trajet.id))
             {
 
                 {
@@ -238,6 +238,8 @@ namespace covoituragecodefirst.Service
                 }
             }
         }
+
+        /*
         public bool AuthenticatePassager(string login, string password)
         {
             var user = _context.Passagers.SingleOrDefault(p => p.Login == login && p.Password == password);
@@ -269,6 +271,89 @@ namespace covoituragecodefirst.Service
                 return true;
             }
         }
+        */
+
+
+         public bool AuthenticateUser(string login, string password)
+        {
+            var User user = _context.Users.SingleOrDefault(u => u.Login == login && u.Password == password);
+
+            if (user == null)
+            {
+                // user not found or incorrect password or login !
+                return false;
+            }
+            else
+            {
+                // user found and password and login is correct
+                return true;
+            }
+        }
+
+        // une méthode returne la liste des réservations dans un trajet donné !
+
+         public List<Reservation> GetReservationsByTrajetId(int trajetId)
+        {
+            // Utiliser LINQ pour interroger la base de données et récupérer les réservations
+            var reservations = _context.Reservations
+                .Where(r => r.TrajetId == trajetId)
+                .ToList();
+
+            return reservations;
+        }
+
+      
+       // une methode returne le nombre des places reservée dans un trajet données 
+
+     public int GetNombrePlacesReservees(int trajetId)
+        {
+            // Récupérer le trajet correspondant à l'ID donné
+            var trajet = _context.Trajets.Find(trajetId);
+
+            if (trajet != null)
+            {
+                // Parcourir la liste des réservations associées au trajet donné
+                int nombrePlacesReservees = 0;
+                foreach (var reservation in trajet.Reservations)
+                {
+                    // Ajouter le nombre de places réservées de cette réservation
+                    nombrePlacesReservees += reservation.NombrePlacesReservees;
+                }
+
+                return nombrePlacesReservees;
+            }
+            else
+            {
+                // Trajet non trouvé, renvoyer une valeur par défaut ou générer une exception selon vos besoins
+                return -1;
+            }
+        }
+
+        //méthode returne le nombre des places restants dans un trajet
+         public int GetNombrePlacesRestantes(int trajetId)
+        {
+            // Récupérer le nombre total de places dans le trajet
+            var trajet = _context.Trajets.Find(trajetId);
+            if (trajet != null)
+            {
+                int nombreTotalPlaces = trajet.NombrePlacesDisponibles;
+
+                // Récupérer le nombre de places réservées dans le trajet
+                int nombrePlacesReservees = GetNombrePlacesReservees(trajetId);
+
+                // Calculer le nombre de places restantes
+                int nombrePlacesRestantes = nombreTotalPlaces - nombrePlacesReservees;
+
+                return nombrePlacesRestantes;
+            }
+            else
+            {
+                // Trajet non trouvé, renvoyer une valeur par défaut ou générer une exception selon vos besoins
+                return -1;
+            }
+        }
+       
+
 
 
     }

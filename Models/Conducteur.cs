@@ -1,5 +1,6 @@
 ﻿namespace covoituragecodefirst.Models
 {
+    [Table("Users")]
     public class Conducteur : User
     {
         // chaque conducteur spécifiée par la liste des trajets li zedhom
