@@ -1,5 +1,6 @@
 ﻿using covoituragecodefirst.Models;
 using Microsoft.EntityFrameworkCore;
+using MySql.EntityFrameworkCore; 
 
 namespace covoituragecodefirst.persistence
 {
@@ -26,23 +27,26 @@ namespace covoituragecodefirst.persistence
     {
         // Configurer la table "Users"
         modelBuilder.Entity<User>()
-            .ToTable("Users")
-            .HasDiscriminator<int>("UserType")
-            .HasValue<Passager>(1)
-            .HasValue<Conducteur>(2);
+                .ToTable("Users", schema: "carpooling")
+            .HasDiscriminator<string>("UserType")
+            .HasValue<User>("User")
+            .HasValue<Passager>("Passager")
+            .HasValue<Conducteur>("Conducteur");
 
-        // Configurer les classes filles Passager et Conducteur
+        /*Configurer les classes filles Passager et Conducteur
         modelBuilder.Entity<Passager>();
-        modelBuilder.Entity<Conducteur>();
+        modelBuilder.Entity<Conducteur>(); */
 
            // Configurer la relation entre Reservation et Passager
              modelBuilder.Entity<Reservation>()
+            .ToTable("Reservations", schema: "carpooling")
             .HasOne(r => r.Passager)
             .WithMany(p => p.Reservations)
             .HasForeignKey(r => r.Passager.Id);
 
             // Configurer la relation entre Trajet et Conducteur
         modelBuilder.Entity<Trajet>()
+            .ToTable("Trajets", schema: "carpooling")
             .HasOne(t => t.CreateurDuTrajet)
             .WithMany(t => t.Trajets)
             .HasForeignKey(t => t.CreateurDuTrajet.Id);

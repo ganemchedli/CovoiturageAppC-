@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace covoituragecodefirst.Models
+﻿namespace covoituragecodefirst.Models
 {
-    [Table("regions")]
+
     public class Region
     {
-        [Key]
+        
         private int _id;
         public int Id   
         {
@@ -14,17 +11,17 @@ namespace covoituragecodefirst.Models
             set { _id = value; }
         }
 
-        private string _nom;
+        private string? _nom;
         public string Nom
         {
-            get { return _nom; }
+            get { return _nom ?? (_nom = ""); }
             set { _nom = value; }
         }
 
-        private string _codePostale;
+        private string? _codePostale;
         public string CodePostale
         {
-            get { return _codePostale; }
+            get { return _codePostale ?? (_codePostale = ""); }
             set { _codePostale = value; }
         }
 

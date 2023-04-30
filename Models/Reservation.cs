@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace covoituragecodefirst.Models
 {
-    [Table("reservations")]
+   
     public class Reservation
     {
-        [Key]
+      
         private int _id;
         public int Id
         {
@@ -28,17 +28,17 @@ namespace covoituragecodefirst.Models
             set { _montantAPayer = value; }
         }
 
-        private Passager _passager;
+        private Passager? _passager;
         public Passager Passager
         {
-            get { return _passager; }
+            get { return _passager ?? (_passager = new Passager());}
             set { _passager = value; }
         }
 
-        private Trajet _trajet;
+        private Trajet? _trajet;
         public Trajet Trajet
         {
-            get { return _trajet; }
+            get { return _trajet ?? (_trajet = new Trajet()); } 
             set { _trajet = value; }
         }
 
