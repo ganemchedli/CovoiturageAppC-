@@ -35,35 +35,35 @@ namespace covoituragecodefirst.Models
             set { _prixPlace = value; }
         }
 
-        private Region _regionDepart;
-        public Region RegionDepart
+        private Region? _regionDepart;
+        public Region? RegionDepart
         {
             get { return _regionDepart; }
             set { _regionDepart = value; }
         }
 
-        private Region _regionArrivee;
-        public Region RegionArrivee
+        private Region? _regionArrivee;
+        public Region? RegionArrivee
         {
             get { return _regionArrivee; }
             set { _regionArrivee = value; }
         }
 
-        private List<Reservation> _reservations;
+        private List<Reservation>? _reservations;
         public List<Reservation> Reservations
         {
-            get { return _reservations; }
+            get { return _reservations ?? (_reservations = new List<Reservation>()); }
             set { _reservations = value; }
         }
 
-        private Conducteur _createurDuTrajet;
-        public Conducteur CreateurDuTrajet
+        private Conducteur? _createurDuTrajet;
+        public Conducteur? CreateurDuTrajet
         {
             get { return _createurDuTrajet; }
             set { _createurDuTrajet = value; }
         }
 
-
+        public Trajet(){}
         public Trajet( int nombrePlacesDisponibles, DateTime dateDepart, decimal prixPlace, Region regionDepart, Region regionArrivee, Conducteur createurDuTrajet)
         {
            

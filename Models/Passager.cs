@@ -2,16 +2,16 @@
 
 namespace covoituragecodefirst.Models
 {
-    [Table("Users")]
+    
     public class Passager : User
     {
-        private ICollection<Reservation> _reservations;
+        private ICollection<Reservation>? _reservations;
         public virtual ICollection<Reservation> Reservations
         {
             get { return _reservations ?? (_reservations = new List<Reservation>()); }
             set { _reservations = value; }
         }
-
+        public Passager() : this(0,"","",0,0,"","",null) {}
         public Passager(int id, string nom, string prenom, int cin, int tel, string login, string password, ICollection<Reservation> reservations) : base(id, nom, prenom, cin, tel, login, password)
         {
             Reservations = reservations ;
